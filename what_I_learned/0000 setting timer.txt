@@ -1,0 +1,24 @@
+1. note: don't perform repetitive taasks inside onTick method, cuz
+it calls number of millisond times, so app crashes, or becomes unresponsive.
+
+            // Set the timer duration (e.g., 15 seconds)
+            long durationInMillis = 15000;
+
+            // Create and start the countdown timer
+            new CountDownTimer(durationInMillis, 1000) {
+            //in above line, 1000 means timer calls every 1000 milliseconds, i.e. each second.
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    // Update the timer display on every tick (every second)
+                    long secondsRemaining = millisUntilFinished / 1000;
+                    enterButton.setText("time remaining: " + secondsRemaining + " seconds");
+
+                }
+
+                @Override
+                public void onFinish() {
+                    // This is called when the timer finishes
+                    enterButton.setText("timer completed");
+
+                }
+            }.start();

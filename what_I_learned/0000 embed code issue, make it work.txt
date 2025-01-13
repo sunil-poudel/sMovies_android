@@ -1,0 +1,3 @@
+<iframe width="100%" height="100%" src="https://www.youtube.com/embed/EPEq3gx377o?autoplay=1" title="Sorry not available" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+remember to make height and width 100%,
+src="https://www.youtube.com/embed/EPEq3gx377o?autoplay=1" remember to append ?autoplay=1 to make autoplay work on load.

@@ -1,0 +1,69 @@
+Source: ChatGPT
+To set an image from a URL in Android Studio, you typically use libraries like Glide or Picasso. Here's how you can do it step by step:
+
+1. Using Glide
+            Glide is a popular image-loading library for Android that is efficient and easy to use.
+
+            Add Glide Dependency: Add the following dependency to your build.gradle file:
+
+            gradle
+            Copy code
+                implementation(libs.glide)
+                annotationProcessor(libs.compiler)
+                //implementation 'com.github.bumptech.glide:glide:4.15.1'
+                //annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+            Load Image in Code: Use Glide in your activity or fragment to load an image into an ImageView:
+
+            java
+            Copy code
+            ImageView imageView = findViewById(R.id.imageView);
+
+            String imageUrl = "https://example.com/image.jpg";
+
+            Glide.with(this)
+                 .load(imageUrl)
+                 .placeholder(R.drawable.placeholder) // Optional: Placeholder image
+                 .error(R.drawable.error)            // Optional: Error image
+                 .into(imageView);
+
+
+2. Using Picasso
+            Picasso is another widely used library for loading images in Android.
+
+            Add Picasso Dependency: Add the following dependency to your build.gradle file:
+
+            gradle
+            Copy code
+            implementation 'com.squareup.picasso:picasso:2.8'
+            Load Image in Code: Use Picasso in your activity or fragment to load an image into an ImageView:
+
+            java
+            Copy code
+            ImageView imageView = findViewById(R.id.imageView);
+
+            String imageUrl = "https://example.com/image.jpg";
+
+            Picasso.get()
+                   .load(imageUrl)
+                   .placeholder(R.drawable.placeholder) // Optional: Placeholder image
+                   .error(R.drawable.error)            // Optional: Error image
+                   .into(imageView);
+            XML Setup
+            In your activity_main.xml (or the relevant layout file), ensure you have an ImageView:
+
+            xml
+            Copy code
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/image_desc" />
+Notes
+Internet Permission: Ensure you have the INTERNET permission in your AndroidManifest.xml:
+xml
+Copy code
+            <uses-permission android:name="android.permission.INTERNET" />
+
+
+For larger projects, Glide is preferred for better performance and caching.

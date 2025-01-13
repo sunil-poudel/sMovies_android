@@ -1,0 +1,47 @@
+//from ChatGPT
+
+    To perform an action only the first time your app runs in Android, you can use SharedPreferences to store a flag indicating whether the app has run before. Here's a step-by-step guide:
+
+    Steps:
+    Check if the app is running for the first time: Use SharedPreferences to look for a specific key (e.g., "isFirstRun").
+    Perform the action if it's the first run: If the key is not set, execute the desired action and then set the flag in SharedPreferences to mark that the action has been completed.
+    Skip the action on subsequent runs: On subsequent app launches, the key will be set, so the action won't execute again.
+    Example Code:
+    java
+    Copy code
+    import android.content.SharedPreferences;
+    import android.os.Bundle;
+    import androidx.appcompat.app.AppCompatActivity;
+
+    public class MainActivity extends AppCompatActivity {
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+            // Access SharedPreferences
+            SharedPreferences sharedPreferences = getSharedPreferences("AppPreferences", MODE_PRIVATE);
+            boolean isFirstRun = sharedPreferences.getBoolean("isFirstRun", true);
+
+            if (isFirstRun) {
+                // Perform the action you want to execute only on the first run
+                performFirstRunAction();
+
+                // Update the flag so this block won't execute again
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isFirstRun", false);
+                editor.apply();
+            }
+        }
+
+        private void performFirstRunAction() {
+            // Action to perform on the first run
+            System.out.println("This runs only on the first launch!");
+            // Add your code here, e.g., showing a welcome screen or tutorial
+        }
+    }
+    Key Points:
+    File Name: "AppPreferences" is the name of the preferences file. You can change it to any suitable name.
+    Flag Name: "isFirstRun" is the key that tracks if the app has run before.
+    Persistence: The value is stored in SharedPreferences and persists until the app is uninstalled or the data is cleared.
+    This approach ensures the action executes only once, regardless of how many times the app is restarted.
