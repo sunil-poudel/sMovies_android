@@ -42,6 +42,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if(movieList.isEmpty()){
+            holder.genre.setText("Failed to load database!");
+            holder.title.setText("Check internet connection or restart the application!");
+        }
         Movie movie = movieList.get(position);
         String poster_url = movie.getPosterUrl();
 

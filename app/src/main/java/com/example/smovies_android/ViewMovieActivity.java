@@ -16,12 +16,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.Util;
 
 import java.util.List;
 
 import Data.DatabaseHandler;
 import Model.Movie;
 import Util.UtilDb;
+import Util.UtilYoutube;
 
 public class ViewMovieActivity extends AppCompatActivity {
 
@@ -46,7 +48,7 @@ public class ViewMovieActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String positionStr = intent.getStringExtra("position");
         assert positionStr != null;
-        Log.d("SUNIL SAYS RECEIVED POSITION", positionStr);
+//        Log.d("SUNIL SAYS RECEIVED POSITION", positionStr);
         int position = Integer.parseInt(positionStr);
 //        String idStr = intent.getStringExtra("movieId");
 //        int id = Integer.parseInt(idStr);
@@ -54,14 +56,25 @@ public class ViewMovieActivity extends AppCompatActivity {
 
         List<Movie> movieList = db.getMoviesOrderAscending(UtilDb.KEY_NAME);
 //        Movie movie = movieList.get(position);
+
+        String EMBED_CODE = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/EPEq3gx377o?autoplay=1\" title=\"Sorry not available\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" ></iframe>";
+
         Movie movie = new Movie();
         for(int i=0; i<movieList.size(); i++){
             if(movieList.get(i).getId()==position) {
                 movie = movieList.get(i);
+                for(int j=0; j<UtilYoutube.movieName.length; j++){
+                    if(movie.getName().equals(UtilYoutube.movieName[j])){
+                        EMBED_CODE = UtilYoutube.embedUrl(UtilYoutube.movieVideoId[j], UtilYoutube.movieTitle[j]);
+                        break;
+                    }
+                }
+
 //                Log.d("SUNIL SAYS METADATA", movieList.get(i).toString());
                 break;
             }
         }
+
 
         movieTitle = findViewById(R.id.movie_title);
         movieTitle.setText(movie.getName());
@@ -101,10 +114,11 @@ public class ViewMovieActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setMediaPlaybackRequiresUserGesture(false);
 
-        String defaultEmbedCode = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/EPEq3gx377o?autoplay=1\" title=\"Sorry not available\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" ></iframe>";
         movieWebViewTrailer.setWebViewClient(new WebViewClient());
-        movieWebViewTrailer.loadData(defaultEmbedCode, "text/html", "utf-8");
+        movieWebViewTrailer.loadData(EMBED_CODE, "text/html", "utf-8");
 
         db.close();
     }
+
+
 }

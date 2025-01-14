@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        movieCount.setText("no. of movies: "+db.getMoviesCount());
+        movieCount.setText("Total movies: "+db.getMoviesCount());
 //        db.deleteAll();
 
 //            Log.d("SUNIL SAYS COUNT", String.valueOf(db.getMoviesCount()));
