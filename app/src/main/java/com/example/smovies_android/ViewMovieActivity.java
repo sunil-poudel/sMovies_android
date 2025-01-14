@@ -46,9 +46,11 @@ public class ViewMovieActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String positionStr = intent.getStringExtra("position");
         int position = Integer.parseInt(positionStr);
+        String idStr = intent.getStringExtra("movieId");
+        int id = Integer.parseInt(idStr);
 //        Log.d("SUNIL SAYS INSIDE VIEW MOVIE", String.valueOf(position));
 
-        List<Movie> movieList = db.getMoviesOrderAscending(UtilDb.KEY_NAME);
+        List<Movie> movieList = db.getAllMovies();
         Movie movie = movieList.get(position);
         movieTitle = findViewById(R.id.movie_title);
         movieTitle.setText(movie.getName());
@@ -92,5 +94,6 @@ public class ViewMovieActivity extends AppCompatActivity {
         movieWebViewTrailer.setWebViewClient(new WebViewClient());
         movieWebViewTrailer.loadData(defaultEmbedCode, "text/html", "utf-8");
 
+        db.close();
     }
 }

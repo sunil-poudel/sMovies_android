@@ -62,7 +62,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 //                Toast.makeText(context, "Clicked "+holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ViewMovieActivity.class);
                 intent.putExtra("position", String.valueOf(holder.getAdapterPosition()));
+                intent.putExtra("movieId", String.valueOf(movie.getId()));
 //                Log.d("SUNIL SAYS ADAPTER POSITION", String.valueOf(holder.getAdapterPosition()));
+//                Log.d("SUNIL SAYS MOVIE ID", String.valueOf(movie.getId()));
                 context.startActivity(intent);
 
             }

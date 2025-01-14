@@ -27,6 +27,11 @@ import com.bumptech.glide.Glide;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import Data.DatabaseHandler;
 import Model.Movie;
 import Util.UtilIMDB;
@@ -36,7 +41,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private ImageView gifView;
     private Button enterButton;
 
-    DatabaseHandler db = new DatabaseHandler(this);
+    private DatabaseHandler db;
 
 
 
@@ -50,10 +55,13 @@ public class WelcomeActivity extends AppCompatActivity {
 
         Glide.with(this).asGif().load(R.drawable.welcome).into(gifView);
 
+        db = new DatabaseHandler(this);
 
 //        db.deleteAll();
         if(db.getMoviesCount()==0) {
             getMovie();
+//            addMoviesAscending(db.getAllMovies(), db);
+
             // Set the timer duration (e.g., 15 seconds)
             long durationInMillis = 15000;
 
@@ -84,15 +92,18 @@ public class WelcomeActivity extends AppCompatActivity {
 
                 }
             }.start();
+            db.close();
         } else{
             Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
+            db.close();
         }
     }
 
 
     public void getMovie(){
+//        List<Movie> tempMovieList = new ArrayList<>();
         for(int i=0; i<UtilIMDB.IMDB_ID.length; i++) {
             String URL = UtilIMDB.GET_API_URL(UtilIMDB.IMDB_ID[i]);
             RequestQueue queue = Volley.newRequestQueue(this);
@@ -119,7 +130,6 @@ public class WelcomeActivity extends AppCompatActivity {
                                 db.addMovies(movie);
 
                             } catch (JSONException e) {
-                                //                            Log.d("SUNIL SAYS JSON EXCEPTION", "ID "+i+" IMDB "+UtilIMDB.IMDB_ID[i]);
                                 throw new RuntimeException(e);
                             }
 
@@ -134,6 +144,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
             queue.add(objectRequest);
         }
+
     }
     private void restartApplication() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

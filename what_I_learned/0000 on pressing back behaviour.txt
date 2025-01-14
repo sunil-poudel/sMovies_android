@@ -1,0 +1,7 @@
+getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+//true enables call back
+                @Override
+                public void handleOnBackPressed() {
+                    recyclerView.setAdapter(movieAdapter);
+                }
+            });

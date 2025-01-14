@@ -1,5 +1,7 @@
 package Model;
 
+import androidx.annotation.NonNull;
+
 public class Movie {
     private int id;
     private String name;
@@ -47,6 +49,14 @@ public class Movie {
         this.boxOffice = boxOffice;
         this.posterUrl = posterUrl;
         this.metacriticScore = metacriticScore;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -143,5 +153,25 @@ public class Movie {
 
     public void setMetacriticScore(String metacriticScore) {
         this.metacriticScore = metacriticScore;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Movie{" +
+//                "id=" + id +
+                ", name='" + name + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", runTime='" + runTime + '\'' +
+                ", genre='" + genre + '\'' +
+                ", director='" + director + '\'' +
+                ", cast='" + cast + '\'' +
+                ", plot='" + plot + '\'' +
+                ", language='" + language + '\'' +
+                ", country='" + country + '\'' +
+//                ", boxOffice='" + boxOffice + '\'' +
+//                ", posterUrl='" + posterUrl + '\'' +
+//                ", metacriticScore='" + metacriticScore + '\'' +
+                '}';
     }
 }
