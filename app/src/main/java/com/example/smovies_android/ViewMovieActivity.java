@@ -58,14 +58,9 @@ public class ViewMovieActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String positionStr = intent.getStringExtra("position");
         assert positionStr != null;
-//        Log.d("SUNIL SAYS RECEIVED POSITION", positionStr);
         int position = Integer.parseInt(positionStr);
-//        String idStr = intent.getStringExtra("movieId");
-//        int id = Integer.parseInt(idStr);
-//        Log.d("SUNIL SAYS INSIDE VIEW MOVIE", String.valueOf(position));
 
         List<Movie> movieList = db.getMoviesOrderAscending(UtilDb.KEY_NAME);
-//        Movie movie = movieList.get(position);
 
         String EMBED_CODE = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/EPEq3gx377o?autoplay=1\" title=\"Sorry not available\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" ></iframe>";
 
@@ -80,7 +75,6 @@ public class ViewMovieActivity extends AppCompatActivity {
                     }
                 }
 
-//                Log.d("SUNIL SAYS METADATA", movieList.get(i).toString());
                 break;
             }
         }

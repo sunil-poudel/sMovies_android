@@ -24,7 +24,6 @@ import Model.Movie;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
     private Context context;
     private List<Movie> movieList;
-//    private List<Integer> originalPositions;
 
     public SearchAdapter(Context context, List<Movie> movieList) {
         this.context = context;
@@ -57,12 +56,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         holder.movieCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(context, "Clicked "+holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ViewMovieActivity.class);
-//                intent.putExtra("position", String.valueOf(holder.getAdapterPosition()));
                 intent.putExtra("position", String.valueOf(movie.getId()));
-//                intent.putExtra("movieId", String.valueOf(movie.getId()));
-//                Log.d("SUNIL SAYS ADAPTER POSITION", String.valueOf(holder.getAdapterPosition()));
                 Log.d("SUNIL SAYS MOVIE ID FROM ADAPTER", String.valueOf(movie.getId()));
                 context.startActivity(intent);
 

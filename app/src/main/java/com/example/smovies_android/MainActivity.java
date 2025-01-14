@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private MovieAdapter movieAdapter;
     private TextView movieCount;
     private ImageButton searchMovieButton;
-//    private DatabaseHandler db = new DatabaseHandler(this);
     private DatabaseHandler db;
     private SearchAdapter searchResultAdapter;
 
@@ -65,21 +64,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         movieCount.setText("Total movies: "+db.getMoviesCount());
-//        db.deleteAll();
 
-//            Log.d("SUNIL SAYS COUNT", String.valueOf(db.getMoviesCount()));
             if(db.getMoviesCount()!=0){
                 List<Movie> movieList = db.getMoviesOrderAscending(UtilDb.KEY_NAME);
                 movieAdapter = new MovieAdapter(this,movieList);
                 recyclerView.setAdapter(movieAdapter);
-//                Log.d("SUNIL SAYS", "DATABASE IS not EMPTY");
-                Log.d("SUNIL SAYS", "Size of database: "+db.getMoviesCount());
-                for(int i=0; i<db.getMoviesCount(); i++){
-//                    Movie movie = db.getMovie(i);
-//                    Log.d("SUNIL SAYS ", String.format("%d -> %s", movie.getId(), movie.getName()));
-                    Log.d("SUNIL SAYS", String.format("%d -> %s", db.getAllMovies().get(i).getId(), db.getAllMovies().get(i).getName()));
-                }
-
             }
 
         searchMovieButton.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 alertDialogBuilder.setPositiveButton("Search", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String searchKey = searchMovieText.getText().toString();
+                        String searchKey = searchMovieText.getText().toString().trim();
                         List<Movie> movieList = searchResults(searchKey);
                         searchResultAdapter = new SearchAdapter(MainActivity.this, movieList);
                         recyclerView.setAdapter(searchResultAdapter);
@@ -130,22 +119,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     public List<Movie> searchResults(String key_name){
-//        DatabaseHandler db = new DatabaseHandler(this);
         List<Movie> movieList = db.getMoviesOrderAscending(UtilDb.KEY_NAME);
         List<Movie> searchResults = new ArrayList<>();
 
         int j=0;
         for(int i=0; i<movieList.size(); i++){
-//            String name = movieList.get(i).getName();
             Movie movie = movieList.get(i);
 
             String searchKey = movie.toString();
             if(searchKey.toLowerCase().contains(key_name.toLowerCase())){
                 searchResults.add(movieList.get(i));
-//                Log.d("SUNIL SAYS MATCH", searchKey);
-//                Log.d("SUNIL SAYS ORIGINAL ID", String.valueOf(movieList.get(i).getId()));
                 searchResults.get(j).setId(movieList.get(i).getId());
-//                Log.d("SUNIL SAYS TRANSMITTED ID", String.valueOf(searchResults.get(j).getId()));
                 j++;
             }
 

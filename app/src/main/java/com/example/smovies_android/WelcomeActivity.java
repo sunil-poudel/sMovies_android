@@ -57,12 +57,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
         db = new DatabaseHandler(this);
 
-//        db.deleteAll();
         if(db.getMoviesCount()==0) {
             getMovie();
-//            addMoviesAscending(db.getAllMovies(), db);
 
-            // Set the timer duration (e.g., 15 seconds)
             long durationInMillis = 15000;
 
             // Create and start the countdown timer
@@ -103,7 +100,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
     public void getMovie(){
-//        List<Movie> tempMovieList = new ArrayList<>();
         for(int i=0; i<UtilIMDB.IMDB_ID.length; i++) {
             String URL = UtilIMDB.GET_API_URL(UtilIMDB.IMDB_ID[i]);
             RequestQueue queue = Volley.newRequestQueue(this);
@@ -137,7 +133,6 @@ public class WelcomeActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    //                Log.d("SUNIL SAYS ERROR ON RESPONSE", "ID "+i+" IMDB "+UtilIMDB.IMDB_ID[i]);
                 }
             }
             );
