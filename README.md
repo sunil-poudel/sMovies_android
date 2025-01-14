@@ -1,6 +1,8 @@
 android version of sMovies application.
 
-android app to allow you to browse for top nepali movies, watch their details.
-uses omdb api to fetch data.
+android app that allows you to browse for top nepali movies, watch their details.
+uses omdb api to fetch data, and youtube api is pre-used to obtain video id and titles of trailers.
 
-currently under development.
+you can search for the movies, and watch trailers or movie songs or even full movies which are embedded using youtube's api.
+
+the app is ready to use!
