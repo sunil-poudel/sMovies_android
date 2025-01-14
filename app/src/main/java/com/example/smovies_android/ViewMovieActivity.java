@@ -45,13 +45,24 @@ public class ViewMovieActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String positionStr = intent.getStringExtra("position");
+        assert positionStr != null;
+        Log.d("SUNIL SAYS RECEIVED POSITION", positionStr);
         int position = Integer.parseInt(positionStr);
-        String idStr = intent.getStringExtra("movieId");
-        int id = Integer.parseInt(idStr);
+//        String idStr = intent.getStringExtra("movieId");
+//        int id = Integer.parseInt(idStr);
 //        Log.d("SUNIL SAYS INSIDE VIEW MOVIE", String.valueOf(position));
 
-        List<Movie> movieList = db.getAllMovies();
-        Movie movie = movieList.get(position);
+        List<Movie> movieList = db.getMoviesOrderAscending(UtilDb.KEY_NAME);
+//        Movie movie = movieList.get(position);
+        Movie movie = new Movie();
+        for(int i=0; i<movieList.size(); i++){
+            if(movieList.get(i).getId()==position) {
+                movie = movieList.get(i);
+//                Log.d("SUNIL SAYS METADATA", movieList.get(i).toString());
+                break;
+            }
+        }
+
         movieTitle = findViewById(R.id.movie_title);
         movieTitle.setText(movie.getName());
 
