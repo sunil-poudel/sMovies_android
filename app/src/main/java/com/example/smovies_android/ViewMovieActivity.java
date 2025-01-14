@@ -1,16 +1,24 @@
 package com.example.smovies_android;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -38,6 +46,8 @@ public class ViewMovieActivity extends AppCompatActivity {
     private TextView movieDirector;
     private TextView movieCast;
     private TextView moviePlot;
+    private ImageButton rotateScreen;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +126,7 @@ public class ViewMovieActivity extends AppCompatActivity {
 
         movieWebViewTrailer.setWebViewClient(new WebViewClient());
         movieWebViewTrailer.loadData(EMBED_CODE, "text/html", "utf-8");
+
 
         db.close();
     }

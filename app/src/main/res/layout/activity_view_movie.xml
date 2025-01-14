@@ -20,6 +20,7 @@
         android:contentDescription="Scrollable movie details page">
 
         <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -63,7 +64,7 @@
 
                 <TextView
                     android:id="@+id/movie_genre"
-                    android:layout_width="200sp"
+                    android:layout_width="150sp"
                     android:layout_height="wrap_content"
                     android:textAlignment="textStart"
                     android:text="Genre: "
@@ -72,7 +73,7 @@
 
                 <TextView
                     android:id="@+id/movie_release_date"
-                    android:layout_width="200sp"
+                    android:layout_width="250sp"
                     android:layout_height="wrap_content"
                     android:text="Released on "
                     android:textColor="@color/black" />
@@ -90,13 +91,13 @@
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/movie_language"
-                    android:layout_width="200sp"
+                    android:layout_width="150sp"
                     android:layout_height="wrap_content"
                     android:text="Language"
                     android:textColor="@color/black"/>
                 <TextView
                     android:id="@+id/movie_country"
-                    android:layout_width="200sp"
+                    android:layout_width="250sp"
                     android:layout_height="wrap_content"
                     android:text="Country"
                     android:textColor="@color/black"/>
@@ -107,7 +108,7 @@
                 android:paddingTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Watch trailer (or movie or movie song in some case)"
+                android:text="Watch trailer (some may be unavailable)"
                 android:textStyle="italic|bold"
                 android:textColor="@color/black"
                 android:textAlignment="center"/>
@@ -118,14 +119,22 @@
                 android:layout_height="495px"
                 android:layout_gravity="center"
                 android:paddingTop="5dp"
-                android:paddingBottom="10dp"
-                />
+                android:paddingBottom="10dp" />
+
             <!--            &lt;!&ndash; Horizontal line &ndash;&gt;-->
             <!--            <View-->
             <!--                android:layout_width="20dp"-->
             <!--                android:layout_height="1dp"-->
             <!--                android:paddingTop="10dp"-->
             <!--                android:background="@color/black" />-->
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="Note: full screen view of trailer is not supported currently. I have put movie song or full movie in some cases, where trailers are not available." />
+
             <TextView
                 android:id="@+id/movie_director"
                 android:layout_width="match_parent"
